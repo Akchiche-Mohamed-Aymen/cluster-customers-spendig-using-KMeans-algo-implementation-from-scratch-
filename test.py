@@ -1,20 +1,16 @@
-from model import KMeans  , _standardize , euclidean_distance
+from model import KMeans  
 import pandas as pd
+import matplotlib.pyplot as plt
+from utils import silhouette_score
 
-def wcss_fun(model):
-    all_sum = 0
-    for i in range(model.K):
-        distances =euclidean_distance( _standardize(df.iloc[model.clusters[i]] , model.mean , model.std) , model.centroids[i]) **2
-        all_sum  += sum(distances)
-    return all_sum
 df = pd.read_csv('customers.csv').drop(columns=["Region"])
+'''
 wcss = []
 try:
     for i in range(2 , 11):
         model = KMeans( K = i )
         model.fit(df)
         wcss.append(wcss_fun(model))
-    import matplotlib.pyplot as plt
 
     # Example data
     k_values = [2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -34,5 +30,10 @@ try:
     plt.show()
 except Exception as ex:
     print(ex)
+'''
 
+model = KMeans( K = i )
+model.fit(df)
+score = silhouette_score(df , model)
+print(f"k = 6 ==> Silhouette Score : " , score)
 """"py test.py"""
