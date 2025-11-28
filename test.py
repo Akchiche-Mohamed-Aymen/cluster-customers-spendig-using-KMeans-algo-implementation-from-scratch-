@@ -32,7 +32,7 @@ except Exception as ex:
     print(ex)
 '''
 
-model = KMeans( K = i )
+model = KMeans( K = 6 )
 model.fit(df)
 score = silhouette_score(df , model)
 print(f"k = 6 ==> Silhouette Score : " , score)
